@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <M5Stack.h>
-#include <MycobotSaver.h>
+#include <MyCobotSaver.h>
 #include <ParameterList.h>
 #include <MyPalletizerCommunicateDefine.h>
 #include <string> 
@@ -39,7 +39,7 @@ public:
 
 	MyPalletizerBasic();
 
-	MycobotSaver saver;
+	MyCobotSaver saver;
 
 	void setup();
 

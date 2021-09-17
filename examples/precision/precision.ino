@@ -1,3 +1,5 @@
+// Appears to depend on non-existant calibration functions, so does not compile.
+
 #include <MyCobotBasic.h>
 
 MyCobotBasic myCobot;

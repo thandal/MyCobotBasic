@@ -1,7 +1,7 @@
 #ifndef transponder_h
 #define transponder_h
 
-#include <MycobotBasic.h>
+#include <MyCobotBasic.h>
 #include "config.h"
 #include "ServerBase.h"
 
@@ -9,14 +9,14 @@
 class Transponder: public ServerBase {
 private:
     bool EXIT = false;
-    bool checkHeader(MycobotBasic &myCobot);
-    int  readSerial(MycobotBasic &myCobot, unsigned char* nDat, int nLen);
+    bool checkHeader(MyCobotBasic &myCobot);
+    int  readSerial(MyCobotBasic &myCobot, unsigned char* nDat, int nLen);
     void rFlushSerial();
-    int  readData(MycobotBasic &myCobot);
-    void connect_ATOM(MycobotBasic &myCobot);
+    int  readData(MyCobotBasic &myCobot);
+    void connect_ATOM(MyCobotBasic &myCobot);
     void info();
 public:
-    void run(MycobotBasic &myCobot);
+    void run(MyCobotBasic &myCobot);
     void init();
     static ServerBase* createInstance() {return new Transponder();}
 };

@@ -19,7 +19,7 @@ int error_display_time = 3000;
 static int EXIT = false;
 
 
-void MainControl::run(MycobotBasic &myCobot){
+void MainControl::run(MyCobotBasic &myCobot){
   pinMode(control_pin, INPUT);
   myCobot.setLEDRGB(0,255,0);
   MainControl::updateMode(myCobot, mycobot_mode);
@@ -47,7 +47,7 @@ void MainControl::run(MycobotBasic &myCobot){
   }
 }
 
-void MainControl::updateMode(MycobotBasic &myCobot, byte btn_pressed)
+void MainControl::updateMode(MyCobotBasic &myCobot, byte btn_pressed)
 {
   if (mycobot_mode == 0)
   {
@@ -163,7 +163,7 @@ void MainControl::updateMode(MycobotBasic &myCobot, byte btn_pressed)
   
 }
 
-void MainControl::displayInfo(MycobotBasic &myCobot, byte mc_mode)
+void MainControl::displayInfo(MyCobotBasic &myCobot, byte mc_mode)
 {
   M5.Lcd.clear(BLACK);
   delay(50);
@@ -445,7 +445,7 @@ void MainControl::displayInfo(MycobotBasic &myCobot, byte mc_mode)
   }
 }
 
-void MainControl::record(MycobotBasic &myCobot)  // is stop
+void MainControl::record(MyCobotBasic &myCobot)  // is stop
 {
   myCobot.setLEDRGB(255,255,0);
   // record mode : 1- record to ram;  2- record to flash
@@ -476,7 +476,7 @@ void MainControl::record(MycobotBasic &myCobot)  // is stop
 }
 
 
-void MainControl::play(MycobotBasic &myCobot)  // is stop  is pause
+void MainControl::play(MyCobotBasic &myCobot)  // is stop  is pause
 {
   myCobot.setLEDRGB(0,255,0);
  
@@ -544,7 +544,7 @@ void MainControl::play(MycobotBasic &myCobot)  // is stop  is pause
   MainControl::displayInfo(myCobot, mycobot_mode);
 }
 
-void MainControl::playFromFlash(MycobotBasic &myCobot)
+void MainControl::playFromFlash(MyCobotBasic &myCobot)
 {
     M5.update(); 
     MainControl::displayInfo(myCobot, 41);
@@ -571,7 +571,7 @@ void MainControl::playFromFlash(MycobotBasic &myCobot)
       this_line += this_char;
       if (this_char == '\n')
       {
-        MycobotSaver::saver_angles_enc sae_this;
+        MyCobotSaver::saver_angles_enc sae_this;
         sae_this = myCobot.saver.processStringIntoInts(this_line);
 
         for(int jn = 0; jn<6; jn++)
@@ -594,7 +594,7 @@ void MainControl::playFromFlash(MycobotBasic &myCobot)
     MainControl::play(myCobot);
 }
 
-void MainControl::recordIntoFlash(MycobotBasic &myCobot)
+void MainControl::recordIntoFlash(MyCobotBasic &myCobot)
 {
     // recording data
     MainControl::record(myCobot);
@@ -635,7 +635,7 @@ void MainControl::recordIntoFlash(MycobotBasic &myCobot)
    MainControl::displayInfo(myCobot, mycobot_mode);
 }
 
-void MainControl::IO(MycobotBasic &myCobot)
+void MainControl::IO(MyCobotBasic &myCobot)
 {
   int pin_data = digitalRead(control_pin);
 
@@ -654,7 +654,7 @@ void MainControl::IO(MycobotBasic &myCobot)
 
 
 /*
-bool MainControl::checkDataLen(MycobotBasic &myCobot)
+bool MainControl::checkDataLen(MyCobotBasic &myCobot)
 {
 
   if (rec_data_len == 0){

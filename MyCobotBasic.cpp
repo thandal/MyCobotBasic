@@ -123,7 +123,7 @@ bool MyCobotBasic::isPoweredOn() {
     return false;
 }
 
-int MycobotBasic::getAtomVersion() {
+int MyCobotBasic::getAtomVersion() {
     Serial2.write(header);
     Serial2.write(header);
     Serial2.write(GET_SYSTEM_VERSION_LEN);
@@ -391,6 +391,36 @@ void* MyCobotBasic::readData() {
                 pCoords->at(5) = (temp > 33000 ? (temp - 65536) : temp) / 100;
 
                 return pCoords;
+            }
+
+            case GET_ENCODERS:
+            {
+                byte encode_1_high = r_data_14[1];
+                byte encode_1_low = r_data_14[2];
+
+                byte encode_2_high = r_data_14[3];
+                byte encode_2_low = r_data_14[4];
+
+                byte encode_3_high = r_data_14[5];
+                byte encode_3_low = r_data_14[6];
+
+                byte encode_4_high = r_data_14[7];
+                byte encode_4_low = r_data_14[8];
+
+                byte encode_5_high = r_data_14[9];
+                byte encode_5_low = r_data_14[10];
+
+                byte encode_6_high = r_data_14[11];
+                byte encode_6_low = r_data_14[12];
+
+                Angles* pEncoders = new Angles;
+                pEncoders->at(0) = encode_1_low + encode_1_high * 256;
+                pEncoders->at(1) = encode_2_low + encode_2_high * 256;
+                pEncoders->at(2) = encode_3_low + encode_3_high * 256;
+                pEncoders->at(3) = encode_4_low + encode_4_high * 256;
+                pEncoders->at(4) = encode_5_low + encode_5_high * 256;
+                pEncoders->at(5) = encode_6_low + encode_6_high * 256;
+                return pEncoders;
             }
 
             case GET_TOOL_REF:
@@ -848,6 +878,36 @@ int MyCobotBasic::getEncoder(int joint) {
 
     return -1;
 }
+
+Angles MyCobotBasic::getEncoders() {
+    Serial2.write(header);
+    Serial2.write(header);
+    Serial2.write(GET_ENCODERS_LEN);
+    Serial2.write(GET_ENCODERS);
+    Serial2.write(footer);
+
+    unsigned long t_begin = millis();
+    void* tempPtr = nullptr;
+    Angles* pEncoders = nullptr;
+    Angles encoders;
+
+    while (true) {
+        if (millis() - t_begin > 40)
+            break;
+        tempPtr = readData();
+        if (tempPtr == nullptr) {
+            continue;
+    } else {
+            pEncoders = (Angles*)tempPtr;
+            for (int i = 0; i < 6; ++i)
+                encoders[i] = pEncoders->at(i);
+            delete pEncoders;
+            return encoders;
+        }
+    }
+    return error_encoders;
+}
+
 
 void MyCobotBasic::setEncoders(Angles angleEncoders, int speed) {
     byte angle_1_high = highByte(static_cast<int>(angleEncoders[0]));

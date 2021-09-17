@@ -63,8 +63,11 @@ class MyCobotBasic {
      void jogAngle(int joint, int direction, int speed);
      void jogCoord(Axis axis, int direction, int speed);
      void jogStop();
+
+     // Encoder mode and operation
      void setEncoder(int joint, int encoder);
      int getEncoder(int joint);
+     Angles getEncoders();
      void setEncoders(Angles angleEncoders, int speed);
 
      // Running Status and Settings
@@ -142,6 +145,7 @@ class MyCobotBasic {
 
      Angles error_angles;
      Coords error_coords;
+     Angles error_encoders;
 
      std::map<int, std::string> messages_map;
 };

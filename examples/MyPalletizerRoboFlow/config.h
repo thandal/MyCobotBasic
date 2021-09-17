@@ -1,7 +1,7 @@
 #ifndef Config_h
 #define Config_h
 
-#include <MycobotLanguage.h>
+#include <MyCobotLanguage.h>
 
 enum FuncIndex: int {
     MAINCONTROL_INDEX = 0,

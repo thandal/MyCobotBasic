@@ -1,7 +1,7 @@
 #ifndef Information_h
 #define Information_h
 
-#include "MycobotBasic.h"
+#include "MyCobotBasic.h"
 #include "SCServo.h"
 #include "config.h"
 #include "ServerBase.h"
@@ -10,10 +10,10 @@ class Connect: public ServerBase{
 private:
     /* data */
     void info();
-    void testServo(MycobotBasic &myCobot);
-    void ReadConfig(MycobotBasic &myCobot);
+    void testServo(MyCobotBasic &myCobot);
+    void ReadConfig(MyCobotBasic &myCobot);
 public:
-    void run(MycobotBasic &myCobot);
+    void run(MyCobotBasic &myCobot);
     static ServerBase* createInstance() {return new Connect();}
 };
 

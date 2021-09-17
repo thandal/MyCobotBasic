@@ -574,7 +574,7 @@ void MainControl::playFromFlash(MyPalletizerBasic &myCobot)
       this_line += this_char;
       if (this_char == '\n')
       {
-        MycobotSaver::saver_MyPalletizer_angles_enc sae_this;
+        MyCobotSaver::saver_MyPalletizer_angles_enc sae_this;
         sae_this = myCobot.saver.MyPalletizerProcessStringIntoInts(this_line);
 
         for(int jn = 0; jn<4; jn++)

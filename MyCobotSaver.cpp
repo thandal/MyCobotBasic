@@ -88,7 +88,7 @@ void MyCobotSaver::readFile(fs::FS &fs, const char * path) {
     }
 }
 
-void MycobotSaver::MyPalletizerReadFile(fs::FS &fs, const char * path) {
+void MyCobotSaver::MyPalletizerReadFile(fs::FS &fs, const char * path) {
     File file = fs.open(path);
     if (!file || file.isDirectory()) {
         Serial.println("- failed to open file for reading");
@@ -102,7 +102,7 @@ void MycobotSaver::MyPalletizerReadFile(fs::FS &fs, const char * path) {
       this_line += this_char;
       if (this_char == '\n') {
         saver_MyPalletizer_angles_enc jae_this;
-        jae_this = MyPalletizerprocessStringIntoInts(this_line);
+        jae_this = MyPalletizerProcessStringIntoInts(this_line);
         this_line = "";
       }
     }
@@ -129,7 +129,7 @@ MyCobotSaver::saver_angles_enc MyCobotSaver::processStringIntoInts(String string
     return sae;
 }
 
-MycobotSaver::saver_MyPalletizer_angles_enc MycobotSaver::MyPalletizerProcessStringIntoInts(String string_input) {
+MyCobotSaver::saver_MyPalletizer_angles_enc MyCobotSaver::MyPalletizerProcessStringIntoInts(String string_input) {
     saver_MyPalletizer_angles_enc sae;
     int data_index = 0;
     String data_angle_string = "";
