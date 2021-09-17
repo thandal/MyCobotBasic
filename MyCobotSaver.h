@@ -1,5 +1,5 @@
-#ifndef mycobotsaver_h
-#define mycobotsaver_h
+#ifndef MYCOBOTSAVER_H_
+#define MYCOBOTSAVER_H_
 
 #include <Arduino.h>
 #include "FS.h"
@@ -9,28 +9,19 @@
 #define FILENAME "/Angles.txt"
 
 
-class MyCobotSaver
-{
-public:
+class MyCobotSaver {
+ public:
+    MyCobotSaver();
 
-	MyCobotSaver();
+    typedef struct {
+      int joint_angle[6];
+    } saver_angles_enc;
 
-	typedef struct{
-	  int joint_angle[6];
-	} saver_angles_enc;
-
-	void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
-	void writeFile(fs::FS &fs, const char * path, const char * message);
-	void appendFile(fs::FS &fs, const char * path, const char * message);
-	void deleteFile(fs::FS &fs, const char * path);
-	void readFile(fs::FS &fs, const char * path);
-	saver_angles_enc processStringIntoInts(String string_input);
-
-
-private:
-
-
+    void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
+    void writeFile(fs::FS &fs, const char * path, const char * message);
+    void appendFile(fs::FS &fs, const char * path, const char * message);
+    void deleteFile(fs::FS &fs, const char * path);
+    void readFile(fs::FS &fs, const char * path);
+    saver_angles_enc processStringIntoInts(String string_input);
 };
-
-
-#endif
+#endif // MYCOBOTSAVER_H_

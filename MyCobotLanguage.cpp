@@ -1,105 +1,77 @@
 #include "MyCobotLanguage.h"
 
-
-MyCobotLanguage::MyCobotLanguage()
-{
-    
-
+MyCobotLanguage::MyCobotLanguage() {
     M5.begin(true, false, true);
     M5.Power.begin();
     delay(100);
 
     M5.Lcd.setTextSize(1);
-    M5.Lcd.setFreeFont(&mycobot_24px); 
+    M5.Lcd.setFreeFont(&mycobot_24px);
     M5.Lcd.setTextDatum(TC_DATUM);
-
-    
 }
 
-void MyCobotLanguage::clearLanguage()
-{
+void MyCobotLanguage::clearLanguage() {
     EEPROM.write(Lan_Add, 0);
     EEPROM.commit();
     delay(100);
 }
 
 
-int MyCobotLanguage::language()
-{
+int MyCobotLanguage::language() {
     // begin
-    //EEPROM.begin(EEPROM_SIZE);
-
-    if(hasSeletecd())
-    {
+    // EEPROM.begin(EEPROM_SIZE);
+    if (hasSeletecd()) {
         return language_val;
-    }
-    else
-    {
+    } else {
         return selectLanguage();
     }
 }
 
 
-bool MyCobotLanguage::hasSeletecd()
-{
+bool MyCobotLanguage::hasSeletecd() {
     language_val = EEPROM.read(Lan_Add);
 
-    //Serial.print("seletec language is : ");
-    //Serial.println(language_val);
+    // Serial.print("seletec language is : ");
+    // Serial.println(language_val);
 
-    if (language_val != 0)
-    {
-        return true;
-    }
-    else // = 0 
-    {
-        return false;
-    }
+    return language_val;
 }
 
-int MyCobotLanguage::selectLanguage()
-{
-
+int MyCobotLanguage::selectLanguage() {
     // display lcd text
-    
     M5.Lcd.drawString("  语言选择", 20, 40, 1);
     M5.Lcd.drawString("  Language", 20, 70, 1);
     M5.Lcd.drawString("English", 60, 190, 1);
     M5.Lcd.drawString("中文", 260, 190, 1);
     M5.update();
-    delay(100);    
+    delay(100);
 
     // begin to choose
-    while(1)
-    {
+    while (1) {
         // english
-        if (M5.BtnA.wasPressed()) 
-        {
+	if (M5.BtnA.wasPressed()) {
             language_val = EN_NO;
             break;
         }
         // chinese
-        if (M5.BtnC.wasPressed()) 
-        {
-            language_val = CN_NO;     
-            break;  
+	if (M5.BtnC.wasPressed()) {
+            language_val = CN_NO;
+            break;
         }
-        M5.update();   
+        M5.update();
         delay(50);
     }
 
-    //Serial.println(language_val);
+    // Serial.println(language_val);
 
     // save to eeprom
     setLanguage(language_val);
-    
+
     delay(50);
     return language_val;
-
 }
 
-void MyCobotLanguage::setLanguage(int lan_val)
-{
+void MyCobotLanguage::setLanguage(int lan_val) {
     EEPROM.write(Lan_Add, lan_val);
     EEPROM.commit();
 }
