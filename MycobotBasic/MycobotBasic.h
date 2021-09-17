@@ -9,12 +9,12 @@
 #include <string>
 #include <map>
 
-#define BAUD_RATE 			1000000      //mycobot use
-// #define BAUD_RATE 			115200      //mycobot-pro use
+// #define BAUD_RATE 			1000000      //mycobot use
+#define BAUD_RATE 			115200      //mycobot-pro use
 #define IORecWrong			-1
 #define	header				0xfe
 #define footer				0xfa
-#define IO_TimeOut			30
+#define IOTimeOut_1			30
 #define ITR_TIMES_MAX		4
 
 #define SEND_DATA_GAP 		4
@@ -52,6 +52,7 @@ public:
 	Angles getAngles();
 	void writeAngle(int joint, float value, int speed);
 	void writeAngles(Angles angles, int speed);
+
 	Coords getCoords();
 	void writeCoord(Axis axis, float value, int speed);
 	void writeCoords(Coords coords, int speed);
@@ -122,6 +123,7 @@ public:
 	void stop();
 
 	void setServoData(byte servo_no, byte servo_state, byte servo_data);
+	
 	void setFreeMove();
 
 	void setLEDRGB(byte r, byte g, byte b);

@@ -76,7 +76,7 @@ int MycobotBasic::readSerial(unsigned char *nDat, int nLen)
     }
     // check time out
     t_use = millis() - t_begin;
-    if (t_use > IO_TimeOut){ 
+    if (t_use > IOTimeOut_1){ 
       break;
     }
   }
@@ -525,6 +525,8 @@ void MycobotBasic::writeAngle(int joint, float value, int speed)
 	Serial2.write(angle_high);
 	Serial2.write(angle_low);
 	Serial2.write(sp);
+	
+	// Serial.println(joint_number);
 	Serial2.write(footer);
 
 	delay(WRITE_SERVO_GAP);
@@ -656,7 +658,7 @@ void MycobotBasic::writeCoords(Coords coord, int speed)
 	byte coord_rz_high = highByte(static_cast<int>(coord[5] * 100));
 
 	byte sp = speed;
-	byte mode = 1;
+	byte mode = 2;
 
 	Serial2.write(header);
 	Serial2.write(header);
