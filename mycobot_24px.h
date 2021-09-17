@@ -3,6 +3,7 @@
 
 #ifndef MYCOBOT_24PX_H_
 #define MYCOBOT_24PX_H_
+
 const uint8_t mycobot_24pxBitmaps[] PROGMEM = {
 /* 0x0020 */
 0x0C, 0x63, 0x8C, 0x71, 0xCE, 0x38, 0xE3, 0x8E, 0x38, 0xE3,
@@ -1547,10 +1548,11 @@ const EncodeRange mycobot_24pxEncodeRange[] PROGMEM = {
 {0xFF10, 0xFF19, 0x00DD}};
 
 const GFXfont mycobot_24px PROGMEM = {
-(uint8_t  *) mycobot_24pxBitmaps,
-(GFXglyph  *) mycobot_24pxGlyphs,
-0x0020, 0xFF19, 25, 80,
-(EncodeRange  *) mycobot_24pxEncodeRange};
+    (uint8_t *) mycobot_24pxBitmaps,
+    (GFXglyph *) mycobot_24pxGlyphs,
+    0x0020, 0xFF19, 25, 80,
+    (EncodeRange *) mycobot_24pxEncodeRange
+};
 
 /* Approx. 12.7 KiB */
 

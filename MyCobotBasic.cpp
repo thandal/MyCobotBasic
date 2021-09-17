@@ -695,7 +695,7 @@ int MyCobotBasic::isInPosition(Coords coord, bool is_linear) {
         if (millis() - t_begin > 40)
             break;
         tempPtr = readData();
-        if (tempPtr == nullptr)
+        if (tempPtr == nullptr) {
             continue;
         } else {
             pIsInposition = (int*)tempPtr;
@@ -1146,7 +1146,7 @@ byte MyCobotBasic::getServoData(int joint, byte data_id) {
         if (millis() - t_begin > 40)
             break;
         tempPtr = readData();
-        if (tempPtr == nullptr)
+        if (tempPtr == nullptr) {
             continue;
         } else {
             pServoData = (byte*)tempPtr;
@@ -1256,7 +1256,7 @@ void MyCobotBasic::receiveMessages() {
         if (millis() - t_begin > 40)
             break;
         tempPtr = readData();
-        if (tempPtr == nullptr)
+        if (tempPtr == nullptr) {
             continue;
         } else {
             pMessage = (byte*)tempPtr;

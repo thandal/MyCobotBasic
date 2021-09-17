@@ -107,7 +107,7 @@ struct JointRanges {
     // joint 6 range
     float j_6_min = -175 / COEFFICIENT;
     float j_6_max = 175 / COEFFICIENT;
-}
+};
 } // namespace myCobotDefine
 
 namespace roboticMessages {
