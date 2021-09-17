@@ -1,7 +1,6 @@
 #include "MyCobotBasic.h"
 
-MyCobotBasic::MyCobotBasic()
-{
+MyCobotBasic::MyCobotBasic() {
 	for (auto &val : error_angles)
 		val = -1000.0;
 	for (auto &val : error_coords)
@@ -9,15 +8,14 @@ MyCobotBasic::MyCobotBasic()
 
 	for (auto val : printList)
 		messages_map.insert(val);
-}    
+}
 
-void MyCobotBasic::setup()
-{
+void MyCobotBasic::setup() {
     delay(500);
     M5.begin(true, false, true);
     M5.Power.begin();
 
-    dacWrite(25,0);   // disable mic 
+    dacWrite(25, 0);  // disable mic
 
     Serial2.begin(BAUD_RATE);
     delay(500);
@@ -26,14 +24,13 @@ void MyCobotBasic::setup()
 
 
 
-bool MyCobotBasic::checkHeader()
-{
+bool MyCobotBasic::checkHeader() {
   byte bDat;
-  byte bBuf[2] = {0,0};
+  byte bBuf[2] = {0, 0};
   byte Cnt = 0;
 
-  while(1){
-    if(!readSerial(&bDat, 1))
+  while (1) {
+	  if (!readSerial(&bDat, 1))
     {
       return 0;      
       }
