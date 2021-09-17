@@ -37,7 +37,7 @@ const float range_offset = 0.01;
 // convert encoder value to rad
 const float cvt_encoder_to_rad = 2048 / PI;
 
-// robotic data struct
+// MyCobot (6DOF) data struct
 enum Axis : int { X = 0, Y, Z, RX, RY, RZ };
 enum Joint : int { J1 = 0, J2, J3, J4, J5, J6 };
 constexpr const int Axes = 6;
@@ -46,6 +46,17 @@ using Coords = std::array<float, Axes>;
 using Angles = std::array<float, Joints>;
 
 using Encoders = std::array<float, Joints>;
+
+// MyPalletizer (4DOF) data struct
+enum MyPalletizerAxis : int { P_X = 0, P_Y, P_Z, P_THETA };
+enum MyPalletizerJoint : int { P_J1 = 0, P_J2, P_J3, P_J4 };
+constexpr const int MyPalletizerAxesNum = 4;
+constexpr const int MyPalletizerJointsNum = 4;
+using MyPalletizerCoords = std::array<float, MyPalletizerAxesNum>;
+using MyPalletizerAngles = std::array<float, MyPalletizerJointsNum>;
+
+using MyPalletizerEncoders = std::array<float, MyPalletizerJointsNum>;
+
 
 // servo speed
 const float maximum_large_servo_speed = 1000;  // 2000?

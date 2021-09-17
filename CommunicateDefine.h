@@ -6,7 +6,7 @@
 #define GET_ROBOT_VERSION_LEN              2
 #define GET_ROBOT_VERSION_RETURN_LEN       3
 
-#define GET_SYSTEM_VERSION                 0X27
+#define GET_SYSTEM_VERSION                 0X2
 #define GET_SYSTEM_VERSION_LEN             2
 #define GET_SYSTEM_VERSION_RETURN_LEN      3
 
@@ -190,7 +190,7 @@
 #define SET_GRIPPER_STATE                  0x66
 #define SET_GRIPPER_STATE_LEN              4
 #define SET_GRIPPER_VALUE                  0x67
-#define SET_GRIPPER_VALUE_LEN              5
+#define SET_GRIPPER_VALUE_LEN              4
 
 #define SET_GRIPPER_INI                    0x68
 #define SET_GRIPPER_INI_LEN                2

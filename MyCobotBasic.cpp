@@ -21,26 +21,26 @@ void MyCobotBasic::setup() {
 }
 
 bool MyCobotBasic::checkHeader() {
-  byte bDat;
-  byte bBuf[2] = {0, 0};
-  byte Cnt = 0;
+    byte bDat;
+    byte bBuf[2] = {0, 0};
+    byte Cnt = 0;
 
-  while (1) {
-      if (!readSerial(&bDat, 1)) {
-          return 0;
-      }
-      bBuf[1] = bBuf[0];
-      bBuf[0] = bDat;
+    while (1) {
+        if (!readSerial(&bDat, 1)) {
+            return 0;
+        }
+        bBuf[1] = bBuf[0];
+        bBuf[0] = bDat;
 
-      if (bBuf[0] == header && bBuf[1] == header) {
-          break;
-      }
-      Cnt++;
-      if (Cnt > 30) {
-         return 0;
-      }
-  }
-  return 1;
+        if (bBuf[0] == header && bBuf[1] == header) {
+            break;
+        }
+        Cnt++;
+        if (Cnt > 30) {
+           return 0;
+        }
+    }
+    return 1;
 }
 
 int MyCobotBasic::readSerial(unsigned char *nDat, int nLen) {
@@ -122,6 +122,34 @@ bool MyCobotBasic::isPoweredOn() {
     }
     return false;
 }
+
+int MycobotBasic::getAtomVersion() {
+    Serial2.write(header);
+    Serial2.write(header);
+    Serial2.write(GET_SYSTEM_VERSION_LEN);
+    Serial2.write(GET_SYSTEM_VERSION);
+    Serial2.write(footer);
+
+    unsigned long t_begin = millis();
+    void* tempPtr = nullptr;
+    int* pReturnVersion = nullptr;
+    int returnVersion;
+
+    while (true) {
+        if (millis() - t_begin > 40)
+            break;
+        tempPtr = readData();
+        if (tempPtr == nullptr) {
+            continue;
+        } else {
+            pReturnVersion = (int*)tempPtr;
+            returnVersion = *pReturnVersion;
+            delete pReturnVersion;
+            return returnVersion;
+        }
+    }
+}
+
 
 void* MyCobotBasic::readData() {
     rFlushSerial();
@@ -1620,6 +1648,9 @@ void MyCobotBasic::focusServo(byte servo_no) {
 }
 
 void MyCobotBasic::setGripperState(byte mode, int sp) {
+    if (sp > 100) {
+        sp = 100;
+    }
     Serial2.write(header);
     Serial2.write(header);
     Serial2.write(SET_GRIPPER_STATE_LEN);
@@ -1630,16 +1661,18 @@ void MyCobotBasic::setGripperState(byte mode, int sp) {
 }
 
 void MyCobotBasic::setGripperValue(int data, int sp) {
+    if (data > 100) {
+        data = 100;
+    }
+    if (sp > 100) {
+        sp = 100;
+    }
     Serial2.write(header);
     Serial2.write(header);
     Serial2.write(SET_GRIPPER_VALUE_LEN);
     Serial2.write(SET_GRIPPER_VALUE);
 
-    byte data_high = highByte(data);
-    byte data_low = lowByte(data);
-
-    Serial2.write(data_high);
-    Serial2.write(data_low);
+    Serial2.write(data);
     Serial2.write(sp);
     Serial2.write(footer);
 }
