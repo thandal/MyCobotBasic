@@ -1,4 +1,4 @@
-#include "MycobotProBasic.h"
+#include "MyCobotProBasic.h"
 
 MyCobotProBasic::MyCobotProBasic()
 {
@@ -19,7 +19,8 @@ void MyCobotProBasic::setup()
 
 	dacWrite(25, 0);   // disable mic 
 
-	Serial2.begin(BAUD_RATE);
+	//Serial2.begin(BAUD_RATE);
+	Serial2.begin(115200);
 	delay(500);
 }
 
@@ -1252,7 +1253,7 @@ byte MyCobotProBasic::getServoData(int joint, byte data_id)
 		}
 	}
 
-	return -1.0;
+	return -1;
 }
 
 void MyCobotProBasic::setServoCalibration(int joint)
