@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <M5Stack.h>
-#include <MycobotSaver.h>
+#include <MyCobotSaver.h>
 #include <ParameterProList.h>
 #include <CommunicateDefinePro.h>
 #include <string>
@@ -37,7 +37,7 @@ public:
 
 	MyCobotProBasic();
 
-	MycobotSaver saver;
+	MyCobotSaver saver;
 
 	void setup();
 
